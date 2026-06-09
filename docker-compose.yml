@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: project_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: jobtracker
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/project_management.sql:/docker-entrypoint-initdb.d/project_management.sql
+
+  frontend:
+    build: ./frontend
+    container_name: project_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+  backend:
+    build: ./backend
+    container_name: project_backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      DB_USER: postgres
+      DB_HOST: postgres
+      DB_NAME: jobtracker
+      DB_PASSWORD: postgres123
+      DB_PORT: 5432
+      JWT_SECRET: my_super_secret_key
+      PORT: 5000
+    ports:
+      - "5000:5000"
+
+volumes:
+  postgres_data:

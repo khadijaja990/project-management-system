@@ -3,7 +3,10 @@ import { pool } from "../config/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const { name, email, password } = req.body;
 
@@ -18,7 +21,10 @@ export const register = async (req: Request, res: Response) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      10
+    );
 
     const newUser = await pool.query(
       `INSERT INTO users (name, email, password)
@@ -40,7 +46,10 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const { email, password } = req.body;
 
@@ -79,6 +88,11 @@ export const login = async (req: Request, res: Response) => {
     res.json({
       message: "Login successful",
       token,
+      user: {
+        id: user.rows[0].id,
+        name: user.rows[0].name,
+        email: user.rows[0].email,
+      },
     });
   } catch (error) {
     console.error(error);

@@ -5,11 +5,9 @@ import { useNavigate, Link } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
 
-  // Login form state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Login user
   const handleLogin = async () => {
     try {
       const response = await axios.post(
@@ -20,10 +18,14 @@ function Login() {
         }
       );
 
-      // Save token
       localStorage.setItem(
         "token",
         response.data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
       );
 
       alert("Login successful");
@@ -40,7 +42,8 @@ function Login() {
     <div className="min-h-screen bg-[#f5f3ff] flex items-center justify-center">
       <div className="bg-white p-10 rounded-3xl shadow-sm w-[450px]">
         <h1 className="text-4xl font-bold text-purple-600 mb-3 text-center">
-            ProjectTracker        </h1>
+          ProjectTracker
+        </h1>
 
         <p className="text-gray-500 text-center mb-10">
           Login to your account
@@ -52,7 +55,9 @@ function Login() {
             placeholder="Email"
             className="bg-gray-100 p-4 rounded-xl outline-none"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
           />
 
           <input
@@ -60,7 +65,9 @@ function Login() {
             placeholder="Password"
             className="bg-gray-100 p-4 rounded-xl outline-none"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
           />
 
           <button
