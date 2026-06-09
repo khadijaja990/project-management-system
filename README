@@ -219,7 +219,7 @@ Result:
 
 Screenshot:
 
-[Insert Backend Test Screenshot Here]
+![Backend Test](screenshots/backend-test.png)
 
 ---
 
@@ -238,8 +238,7 @@ Manual testing was performed for:
 
 Screenshot:
 
-[Insert Frontend Testing Screenshot Here]
-
+![Frontend Test](screenshots/frontend-test.png)
 ---
 
 # Deployment
