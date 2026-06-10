@@ -25,7 +25,7 @@ function EditProject() {
           localStorage.getItem("token");
 
         const response = await axios.get(
-          "http://localhost:5000/api/projects",
+          "https://project-management-system-fjma.onrender.com/api/projects",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ function EditProject() {
         localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/projects/${id}`,
+        `https://project-management-system-fjma.onrender.com/api/projects/${id}`,
         formData,
         {
           headers: {

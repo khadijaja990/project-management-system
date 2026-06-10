@@ -38,7 +38,7 @@ function AddProject() {
       const token = localStorage.getItem("token");
 
       await axios.post(
-  "http://localhost:5000/api/projects",
+  "https://project-management-system-fjma.onrender.com/api/projects",
         formData,
         {
           headers: {
