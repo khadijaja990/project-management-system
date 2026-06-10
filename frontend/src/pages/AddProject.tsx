@@ -6,7 +6,6 @@ import MainLayout from "../layout/MainLayout";
 function AddProject() {
   const navigate = useNavigate();
 
-  // Project form state
   const [formData, setFormData] = useState({
     company: "",
     position: "",
@@ -15,7 +14,6 @@ function AddProject() {
     notes: "",
   });
 
-  // Handle form inputs
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -27,18 +25,16 @@ function AddProject() {
     });
   };
 
-  // Submit project
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
 
     try {
-      // Get token from local storage
       const token = localStorage.getItem("token");
 
       await axios.post(
-  "https://project-management-system-fjma.onrender.com/api/projects",
+        "http://localhost:5000/api/projects",
         formData,
         {
           headers: {
@@ -48,11 +44,9 @@ function AddProject() {
       );
 
       alert("Project added successfully");
-
       navigate("/projects");
     } catch (error) {
-      console.error("Failed to save project", error);
-
+      console.error(error);
       alert("Failed to save project");
     }
   };
@@ -60,8 +54,6 @@ function AddProject() {
   return (
     <MainLayout>
       <div className="p-10">
-
-        {/* Page Header */}
         <h1 className="text-4xl font-bold text-gray-800 mb-3">
           Add Project
         </h1>
@@ -70,7 +62,6 @@ function AddProject() {
           Create and manage a new project.
         </p>
 
-        {/* Project Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-2xl shadow-sm p-8 max-w-3xl"
@@ -94,7 +85,6 @@ function AddProject() {
               value={formData.position}
               onChange={handleChange}
               className="bg-gray-100 p-4 rounded-xl outline-none"
-              required
             />
 
             <select
@@ -135,7 +125,6 @@ function AddProject() {
           </button>
 
         </form>
-
       </div>
     </MainLayout>
   );

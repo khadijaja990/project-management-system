@@ -26,18 +26,23 @@ function Register() {
   const handleRegister = async () => {
     try {
       await axios.post(
-        "https://project-management-system-fjma.onrender.com/api/auth/register",
-        formData
-      );
+  "http://localhost:5000/api/auth/register",
+  formData
+);
 
       alert("Account created successfully");
 
       navigate("/login");
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+  console.log(error);
+  console.log(error.response);
 
-      alert("Registration failed");
-    }
+  alert(
+    error.response?.data?.message ||
+    error.message ||
+    "Registration failed"
+  );
+}
   };
 
   return (

@@ -10,7 +10,7 @@ function Tasks() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "https://project-management-system-fjma.onrender.com/api/tasks",
+        "http://localhost:5000/api/tasks",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ function Tasks() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `https://project-management-system-fjma.onrender.com/api/tasks/${id}`,
+        `http://localhost:5000/api/tasks/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
