@@ -18,14 +18,14 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: true,
     credentials: true,
   })
 );
 
 app.use(cookieParser());
 
-// Test database connection
+// Database Connection Test
 pool
   .query("SELECT NOW()")
   .then((result) => {
@@ -42,15 +42,16 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 
+// Health Check Route
 app.get("/", (req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
-    message: "Backend running 🚀",
+    message: "Project Management System API Running 🚀",
   });
 });
 
 const PORT = Number(process.env.PORT) || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
